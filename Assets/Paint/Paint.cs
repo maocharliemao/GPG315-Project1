@@ -20,7 +20,7 @@ public class Paint : MonoBehaviour
         public LayerMask DrawingLayers;
         public bool ResetCanvasOnPlay = true;
         public Color ResetColor = new Color(0, 0, 0, 0);
-        public bool ResetToTextureOnPlay = false;
+        // public bool ResetToTextureOnPlay = false;
         public Texture2D ResetTexture;
 
         // Instance and sprite-related properties
@@ -165,15 +165,46 @@ public class Paint : MonoBehaviour
 
             if (ResetCanvasOnPlay)
                 ResetCanvas();
-            else if (ResetToTextureOnPlay)
-            {
-                Graphics.CopyTexture(ResetTexture, drawableTexture);
-                Debug.Log("Reset texture");
-            }
+            // else if (ResetToTextureOnPlay)
+            // {
+            //     Graphics.CopyTexture(ResetTexture, drawableTexture);
+            //     Debug.Log("Reset texture");
+            // }
         }
         
+        public void WhiteBackground()
+        {
+            if (drawableTexture == null)
+            {
+                return;
+            }
+            Color[] whitePixels = new Color[drawableTexture.width * drawableTexture.height];
+
+            for (int i = 0; i < whitePixels.Length; i++)
+            {
+                whitePixels[i] = Color.white;
+            }
+            drawableTexture.SetPixels(whitePixels);
+            drawableTexture.Apply();
+        }
         
-        
+        public void TransparentBackground()
+        {
+            if (drawableTexture == null)
+            {
+                return;
+            }
+
+            Color[] transparentPixels = new Color[drawableTexture.width * drawableTexture.height];
+
+            for (int i = 0; i < transparentPixels.Length; i++)
+            {
+                transparentPixels[i] = new Color(0, 0, 0, 0); // Fully transparent
+            }
+
+            drawableTexture.SetPixels(transparentPixels);
+            drawableTexture.Apply();
+        }
     }
     
     

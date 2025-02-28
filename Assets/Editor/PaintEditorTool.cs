@@ -44,6 +44,14 @@ public class PaintEditorTool : EditorWindow
         {
             ResetPage();
         }
+        if (GUILayout.Button("Fill Canvas White"))
+        {
+            WhiteCanvas();
+        }
+        if (GUILayout.Button("Remove Canvas"))
+        {
+            RemoveCanvas();
+        }
     }
 
     private void ApplySettings()
@@ -88,5 +96,24 @@ public class PaintEditorTool : EditorWindow
         Paint.name = "PaintCanvas";
 
         Debug.Log("Drawing canvas instantiated!");
+    }
+    
+    private void WhiteCanvas()
+    {
+        Paint paintInstance = FindObjectOfType<Paint>();
+        if (paintInstance != null)
+        {
+            paintInstance.WhiteBackground();
+        }
+
+    }
+    private void RemoveCanvas()
+    {
+        Paint paintInstance = FindObjectOfType<Paint>();
+        if (paintInstance != null)
+        {
+            paintInstance.TransparentBackground();
+        }
+
     }
 }
