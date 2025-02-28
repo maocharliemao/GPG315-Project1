@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-namespace FreeDraw
-{
-    [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(Collider2D))]
-    public class Drawable : MonoBehaviour
+
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
+public class Paint : MonoBehaviour
     {
         // Static properties
         public static Color PenColor = Color.red;
@@ -26,7 +24,7 @@ namespace FreeDraw
         public Texture2D ResetTexture;
 
         // Instance and sprite-related properties
-        private static Drawable instance;
+        private static Paint instance;
         private Sprite drawableSprite;
         private Texture2D drawableTexture;
 
@@ -183,4 +181,3 @@ namespace FreeDraw
     
     
     
-}

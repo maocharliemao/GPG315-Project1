@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using FreeDraw;
 using UnityEditor;
 using UnityEngine;
 
@@ -49,21 +48,21 @@ public class PaintEditorTool : EditorWindow
 
     private void ApplySettings()
     {
-        Drawable.PenColor = new Color(penColor.r, penColor.g, penColor.b, transparency);
-        Drawable.PenWidth = (int)penWidth;
+        Paint.PenColor = new Color(penColor.r, penColor.g, penColor.b, transparency);
+        Paint.PenWidth = (int)penWidth;
         Debug.Log("Drawing settings applied");
     }
 
     private void ApplyEraseTool()
     {
-        Drawable.PenColor = new Color(1f, 1f, 1f, 1f);
-        Drawable.PenWidth = (int)penWidth;
+        Paint.PenColor = new Color(1f, 1f, 1f, 1f);
+        Paint.PenWidth = (int)penWidth;
         Debug.Log("Erase tool activated");
     }
 
     private void ResetPage()
     {
-        Drawable drawable = FindObjectOfType<Drawable>();
+        Paint drawable = FindObjectOfType<Paint>();
         if (drawable != null)
         {
             drawable.ResetCanvas();
@@ -77,7 +76,7 @@ public class PaintEditorTool : EditorWindow
 
     private void StartDrawing()
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PaintCanvas.prefab");
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint.prefab");
 
         if (prefab == null)
         {
@@ -85,8 +84,8 @@ public class PaintEditorTool : EditorWindow
             return;
         }
 
-        GameObject drawingCanvas = Instantiate(prefab);
-        drawingCanvas.name = "DrawingCanvas_Instance";
+        GameObject Paint = Instantiate(prefab);
+        Paint.name = "PaintCanvas";
 
         Debug.Log("Drawing canvas instantiated!");
     }

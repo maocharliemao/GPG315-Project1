@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957879621533782827}
-  - component: {fileID: 8755975040502103566}
   - component: {fileID: 4249139828430536791}
   - component: {fileID: 6392714353600880323}
+  - component: {fileID: 4104477112945575697}
   m_Layer: 6
   m_Name: DrawingCanvas
   m_TagString: Untagged
@@ -34,25 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8755975040502103566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2946870759361186826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 571045d48cec88d48848f53bf379f673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DrawingLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  ResetCanvasOnPlay: 1
-  ResetColor: {r: 1, g: 1, b: 1, a: 0}
-  ResetToTextureOnPlay: 0
-  ResetTexture: {fileID: 2800000, guid: a33b8a6cf583c534b83219b0504884d0, type: 3}
 --- !u!212 &4249139828430536791
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -99,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 16.05, y: 8.67}
+  m_Size: {x: 10, y: 7.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -142,7 +123,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 10, y: 7.5}
-    newSize: {x: 16.05, y: 8.67}
+    newSize: {x: 10, y: 7.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -150,3 +131,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 7.5}
   m_EdgeRadius: 0
+--- !u!114 &4104477112945575697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946870759361186826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21dc3553c71fb3749b840062c0cb2986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DrawingLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ResetCanvasOnPlay: 1
+  ResetColor: {r: 0, g: 0, b: 0, a: 0}
+  ResetToTextureOnPlay: 0
+  ResetTexture: {fileID: 0}
