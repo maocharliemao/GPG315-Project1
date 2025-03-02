@@ -40,10 +40,7 @@ public class PaintEditorTool : EditorWindow
             ApplyEraseTool();
         }
 
-        if (GUILayout.Button("Reset Page"))
-        {
-            ResetPage();
-        }
+
         if (GUILayout.Button("Fill Canvas White"))
         {
             WhiteCanvas();
@@ -58,44 +55,27 @@ public class PaintEditorTool : EditorWindow
     {
         Paint.PenColor = new Color(penColor.r, penColor.g, penColor.b, transparency);
         Paint.PenWidth = (int)penWidth;
-        Debug.Log("Drawing settings applied");
     }
 
     private void ApplyEraseTool()
     {
         Paint.PenColor = new Color(1f, 1f, 1f, 1f);
         Paint.PenWidth = (int)penWidth;
-        Debug.Log("Erase tool activated");
     }
 
-    private void ResetPage()
-    {
-        Paint drawable = FindObjectOfType<Paint>();
-        if (drawable != null)
-        {
-            drawable.ResetCanvas();
-            Debug.Log("Canvas reset!");
-        }
-        else
-        {
-            Debug.LogWarning("No Drawable object found in the scene.");
-        }
-    }
+
 
     private void StartDrawing()
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint.prefab");
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint2D.prefab");
 
         if (prefab == null)
         {
-            Debug.LogError("DrawingCanvasPrefab not found! Make sure it's in Assets/Prefabs/");
             return;
         }
 
         GameObject Paint = Instantiate(prefab);
         Paint.name = "PaintCanvas";
-
-        Debug.Log("Drawing canvas instantiated!");
     }
     
     private void WhiteCanvas()
