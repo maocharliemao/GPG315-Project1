@@ -69,13 +69,28 @@ public class PaintEditorTool : EditorWindow
     {
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint2D.prefab");
 
-        if (prefab == null)
-        {
-            return;
-        }
-
+        
         GameObject Paint = Instantiate(prefab);
         Paint.name = "PaintCanvas";
+        
+        //
+        // // Load and instantiate the Camera prefab
+        // GameObject cameraPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/paint/Main Camera.prefab");
+        //
+        // if (cameraPrefab == null)
+        // {
+        //     Debug.LogError("Camera prefab not found!");
+        //     return;
+        // }
+        //
+        // // // Instantiate the camera and set its tag as MainCamera
+        // // GameObject cameraInstance = Instantiate(cameraPrefab);
+        // // cameraInstance.tag = "MainCamera";
+        // //
+        // // // Optionally, position the camera in the scene
+        // // cameraInstance.transform.position = new Vector3(0, 0, -10); // Set position for 2D scene
+        // //
+        
     }
     
     private void WhiteCanvas()

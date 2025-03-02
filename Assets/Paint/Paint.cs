@@ -10,6 +10,7 @@ public class Paint : MonoBehaviour
     public delegate void BrushFunction(Vector2 worldPosition);
 
     public BrushFunction CurrentBrush;
+    public Camera mainCamera;
 
     public static Color PenColor = Color.red;
     public static int PenWidth = 3;
@@ -19,11 +20,75 @@ public class Paint : MonoBehaviour
     private Vector2 previousDragPosition;
     private Color32[] currentColors;
 
+    // void Start()
+    // {
+    //     if (mainCamera == null)
+    //     {
+    //         mainCamera = Camera.main; // Try to get Camera.main after scene setup
+    //     }
+    //
+    //     if (mainCamera == null)
+    //     {
+    //         Debug.LogError("Main Camera not found. Please ensure a camera is tagged 'MainCamera'.");
+    //     }
+    // }
+
     void Awake()
     {
         CurrentBrush = ApplyPenBrush;
         drawableSprite = GetComponent<SpriteRenderer>().sprite;
         drawableTexture = drawableSprite.texture;
+
+        // // Initialize camera reference
+        // mainCamera = Camera.main;
+        //
+        // if (mainCamera == null)
+        // {
+        //     Debug.LogError("Main Camera not found. Please ensure there's a camera tagged as 'MainCamera'.");
+        // }
+    }
+
+
+    void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mouseWorldPos = GetMouseWorldPosition();
+            Collider2D hitCollider = GetColliderAtWorldPosition(mouseWorldPos);
+
+            if (hitCollider != null)
+            {
+                ApplyBrush(mouseWorldPos);
+            }
+            else
+            {
+                ResetPreviousDragPosition();
+            }
+        }
+        else
+        {
+            ResetPreviousDragPosition();
+        }
+    }
+
+    private Vector2 GetMouseWorldPosition()
+    {
+        return mainCamera.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    private Collider2D GetColliderAtWorldPosition(Vector2 worldPosition)
+    {
+        return Physics2D.OverlapPoint(worldPosition);
+    }
+
+    private void ApplyBrush(Vector2 worldPosition)
+    {
+        CurrentBrush(worldPosition);
+    }
+
+    private void ResetPreviousDragPosition()
+    {
+        previousDragPosition = Vector2.zero;
     }
 
     public void ApplyPenBrush(Vector2 worldPosition)
@@ -44,27 +109,6 @@ public class Paint : MonoBehaviour
         previousDragPosition = pixelPos;
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos);
-
-            if (hit != null)
-            {
-                CurrentBrush(mouseWorldPos);
-            }
-            else
-            {
-                previousDragPosition = Vector2.zero;
-            }
-        }
-        else
-        {
-            previousDragPosition = Vector2.zero;
-        }
-    }
 
     private void Drawing(Vector2 start, Vector2 end, int width, Color colour)
     {
