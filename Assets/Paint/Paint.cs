@@ -20,32 +20,13 @@ public class Paint : MonoBehaviour
     private Vector2 previousDragPosition;
     private Color32[] currentColors;
 
-    // void Start()
-    // {
-    //     if (mainCamera == null)
-    //     {
-    //         mainCamera = Camera.main; // Try to get Camera.main after scene setup
-    //     }
-    //
-    //     if (mainCamera == null)
-    //     {
-    //         Debug.LogError("Main Camera not found. Please ensure a camera is tagged 'MainCamera'.");
-    //     }
-    // }
+
 
     void Awake()
     {
         CurrentBrush = ApplyPenBrush;
         drawableSprite = GetComponent<SpriteRenderer>().sprite;
         drawableTexture = drawableSprite.texture;
-
-        // // Initialize camera reference
-        // mainCamera = Camera.main;
-        //
-        // if (mainCamera == null)
-        // {
-        //     Debug.LogError("Main Camera not found. Please ensure there's a camera tagged as 'MainCamera'.");
-        // }
     }
 
 

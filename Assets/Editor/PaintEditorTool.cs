@@ -8,6 +8,7 @@ public class PaintEditorTool : EditorWindow
     private Color penColor = Color.red;
     private float penWidth = 5f;
     private float transparency = 1f;
+    private static GameObject currentPaintCanvas;
 
     [MenuItem("Tools/Drawing Settings")]
     public static void ShowWindow()
@@ -30,9 +31,14 @@ public class PaintEditorTool : EditorWindow
 
         GUILayout.Space(10);
 
-        if (GUILayout.Button("Start Drawing"))
+        if (GUILayout.Button("Start Drawing 2D"))
         {
-            StartDrawing();
+            StartDrawing2D();
+        }
+
+        if (GUILayout.Button("Start Drawing 3D"))
+        {
+            StartDrawing3D();
         }
 
         if (GUILayout.Button("Erase Tool"))
@@ -65,34 +71,37 @@ public class PaintEditorTool : EditorWindow
 
 
 
-    private void StartDrawing()
-    {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint2D.prefab");
 
-        
-        GameObject Paint = Instantiate(prefab);
-        Paint.name = "PaintCanvas";
-        
-        //
-        // // Load and instantiate the Camera prefab
-        // GameObject cameraPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/paint/Main Camera.prefab");
-        //
-        // if (cameraPrefab == null)
-        // {
-        //     Debug.LogError("Camera prefab not found!");
-        //     return;
-        // }
-        //
-        // // // Instantiate the camera and set its tag as MainCamera
-        // // GameObject cameraInstance = Instantiate(cameraPrefab);
-        // // cameraInstance.tag = "MainCamera";
-        // //
-        // // // Optionally, position the camera in the scene
-        // // cameraInstance.transform.position = new Vector3(0, 0, -10); // Set position for 2D scene
-        // //
-        
+    private void StartDrawing2D()
+    {
+        SpawnCanvas("Assets/Paint/Paint2D.prefab", new Vector3(0, 0, 10));
     }
-    
+
+    private void StartDrawing3D()
+    {
+        SpawnCanvas("Assets/Paint/Paint3D.prefab", new Vector3(0, 5, 10));
+    }
+
+
+
+    private void SpawnCanvas(string prefabPath, Vector3 position)
+    {
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+
+        if (prefab != null)
+        {
+            RemoveCanvas();
+
+            currentPaintCanvas = Instantiate(prefab);
+            currentPaintCanvas.name = "PaintCanvas";
+            currentPaintCanvas.transform.position = position;
+
+            SceneView.RepaintAll(); 
+  
+        }
+    }
+
+
     private void WhiteCanvas()
     {
         Paint paintInstance = FindObjectOfType<Paint>();
@@ -100,15 +109,14 @@ public class PaintEditorTool : EditorWindow
         {
             paintInstance.WhiteBackground();
         }
-
     }
     private void RemoveCanvas()
     {
-        Paint paintInstance = FindObjectOfType<Paint>();
-        if (paintInstance != null)
+        if (currentPaintCanvas != null)
         {
-            paintInstance.TransparentBackground();
+            DestroyImmediate(currentPaintCanvas);
+            currentPaintCanvas = null;
         }
-
     }
+    
 }
