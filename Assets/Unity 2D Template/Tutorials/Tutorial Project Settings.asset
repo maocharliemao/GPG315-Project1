@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tutorial Project Settings
   m_EditorClassIdentifier: 
   m_WelcomePage: {fileID: 11400000, guid: c4fddd74b608848c6871b3b0f762ff1d, type: 2}
-  m_InitialScene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+  m_InitialScene: {fileID: 102900000, guid: d794a2ef8ba31d847ad3c19d03e2ddb9, type: 3}
   m_InitialCameraSettings:
     m_CameraMode: 0
     m_FocusMode: 0

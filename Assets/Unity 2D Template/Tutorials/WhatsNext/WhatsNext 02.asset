@@ -62,7 +62,7 @@ MonoBehaviour:
       Title:
         m_Untranslated: Explore
       Text:
-        m_Untranslated: <a href="https://learn.unity.com/pathway/junior-programmer?utm_source=platformer-4.0.2&utm_medium=template">Explore
+        m_Untranslated: <a href="https://learn.unity.com/pathway/junior-programmer?utm_source=fps-4.0.2&utm_medium=template">Explore
           the Junior Programmer pathway now,</a> or select <b>More</b> below for
           more ideas about what you can try next.
       m_Tutorial: {fileID: 0}
