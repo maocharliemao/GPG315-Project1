@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Collider2D))]
-public class Paint : MonoBehaviour, IPaintable
+public class Paintv2 : MonoBehaviour, IPaintable
 {
     public static Color PenColor = Color.red;
     public static int PenWidth = 3;
@@ -20,7 +17,7 @@ public class Paint : MonoBehaviour, IPaintable
     public Color ResetColor = new Color(0, 0, 0, 0);
 
 
-    private static Paint instance;
+    private static Paintv2 instance;
     private Sprite drawableSprite;
     private Texture2D drawableTexture;
 
@@ -50,17 +47,20 @@ public class Paint : MonoBehaviour, IPaintable
         previousDragPosition = pixelPos;
     }
 
-
+    // raycast for 3d
     void Update()
     {
         bool mouseHeldDown = Input.GetMouseButton(0);
         if (mouseHeldDown && !noDrawingOnCurrentDrag)
         {
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Collider2D hit = Physics2D.OverlapPoint(mouseWorldPos, DrawingLayers.value);
-            if (hit != null && hit.transform != null)
+            // Raycast from the camera in the mouse direction
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, DrawingLayers)) // 3D raycast
             {
-                CurrentBrush(mouseWorldPos);
+                Vector3 worldPosition = hit.point; // Get the exact hit point on the object
+                CurrentBrush(worldPosition); // Draw at the correct position
             }
             else
             {
@@ -79,7 +79,6 @@ public class Paint : MonoBehaviour, IPaintable
 
         wasMouseHeldDown = mouseHeldDown;
     }
-
 
     public void DrawLine(Vector2 startPoint, Vector2 endPoint, int width, Color color)
     {
@@ -128,11 +127,13 @@ public class Paint : MonoBehaviour, IPaintable
         drawableTexture.Apply();
     }
 
-
+// ortho to persepctive 
     public Vector2 WorldToPixelCoordinates(Vector2 worldPosition)
     {
         Vector3 localPos = transform.InverseTransformPoint(worldPosition);
+
         float unitsToPixels = drawableSprite.rect.width / drawableSprite.bounds.size.x * transform.localScale.x;
+
         float centeredX = localPos.x * unitsToPixels + drawableSprite.rect.width / 2;
         float centeredY = localPos.y * unitsToPixels + drawableSprite.rect.height / 2;
 

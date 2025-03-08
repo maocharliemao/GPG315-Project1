@@ -51,6 +51,11 @@ public class PaintEditorTool : EditorWindow
         {
             WhiteCanvas();
         }
+        
+        if (GUILayout.Button("transparent"))
+        {
+           Trans();
+        }
         if (GUILayout.Button("Remove Canvas"))
         {
             RemoveCanvas();
@@ -69,45 +74,65 @@ public class PaintEditorTool : EditorWindow
         Paint.PenWidth = (int)penWidth;
     }
 
-
-
-
     private void StartDrawing2D()
     {
-        SpawnCanvas("Assets/Paint/Paint2D.prefab", new Vector3(0, 0, 10));
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint2D.prefab");
+
+
+        GameObject Paint = Instantiate(prefab);
+        Paint.name = "Paint2DCanvas";
     }
 
+
+    // private void StartDrawing2D()
+    // {
+    //     SpawnCanvas("Assets/Paint/Paint2D.prefab", new Vector3(0, 0, 10));
+    // }
+    //
     private void StartDrawing3D()
     {
-        SpawnCanvas("Assets/Paint/Paint3D.prefab", new Vector3(0, 5, 10));
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint3D.prefab");
+
+
+        GameObject Paint = Instantiate(prefab);
+        Paint.name = "Paint3DCanvas";
     }
 
 
 
-    private void SpawnCanvas(string prefabPath, Vector3 position)
-    {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-
-        if (prefab != null)
-        {
-            RemoveCanvas();
-
-            currentPaintCanvas = Instantiate(prefab);
-            currentPaintCanvas.name = "PaintCanvas";
-            currentPaintCanvas.transform.position = position;
-
-            SceneView.RepaintAll(); 
-  
-        }
-    }
+    // private void SpawnCanvas(string prefabPath, Vector3 position)
+    // {
+    //     GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+    //
+    //     if (prefab != null)
+    //     {
+    //         RemoveCanvas();
+    //
+    //         currentPaintCanvas = Instantiate(prefab);
+    //         currentPaintCanvas.name = "PaintCanvas";
+    //         currentPaintCanvas.transform.position = position;
+    //
+    //         SceneView.RepaintAll(); 
+    //
+    //     }
+    // }
 
 
     private void WhiteCanvas()
     {
-        Paint paintInstance = FindObjectOfType<Paint>();
+        IPaintable paintInstance = FindObjectOfType<MonoBehaviour>() as IPaintable;
         if (paintInstance != null)
         {
             paintInstance.WhiteBackground();
+        }
+    }
+
+    private void Trans()
+    {
+        IPaintable paintInstance = FindObjectOfType<MonoBehaviour>() as IPaintable;
+        if (paintInstance != null)
+        {
+            paintInstance.TransparentBackground();
         }
     }
     private void RemoveCanvas()
@@ -119,4 +144,5 @@ public class PaintEditorTool : EditorWindow
         }
     }
     
+
 }

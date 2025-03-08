@@ -143,5 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21dc3553c71fb3749b840062c0cb2986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 7612944011309015261, guid: 428bb3d4840f427459b6e626d3cfc3f8,
-    type: 3}
+  DrawingLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  ResetColor: {r: 0, g: 0, b: 0, a: 0}
