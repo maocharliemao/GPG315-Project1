@@ -10,19 +10,18 @@ public class PaintEditorTool : EditorWindow
     private float transparency = 1f;
     private bool currentBackgroundIsTransparent = false;
 
-    [MenuItem("Tools/Drawing Settings")]
+    [MenuItem("Tools/Ultimate Paint Tool")]
     public static void ShowWindow()
     {
-        GetWindow<PaintEditorTool>("Drawing Settings");
+        GetWindow<PaintEditorTool>("Ultimate Paint Tool");
     }
 
     private void OnGUI()
 
     {
-// Drawing Settings Header
-        GUILayout.Label("Drawing Settings", EditorStyles.boldLabel);
+        GUILayout.Label("Brush & Eraser Settings", EditorStyles.boldLabel);
 
-        // Pen Settings
+
         Color newPenColor = EditorGUILayout.ColorField("Colour", penColor);
         if (newPenColor != penColor)
         {
@@ -46,22 +45,21 @@ public class PaintEditorTool : EditorWindow
 
         GUILayout.Space(10);
 
-        // Start Drawing Section
-        GUILayout.Label("Start Drawing", EditorStyles.boldLabel);
 
-        if (GUILayout.Button("Start Drawing 2D"))
+        GUILayout.Label("Select a Platform", EditorStyles.boldLabel);
+
+        if (GUILayout.Button("2D"))
         {
             StartDrawing2D();
         }
 
-        if (GUILayout.Button("Start Drawing 3D"))
+        if (GUILayout.Button("First Person (3D)"))
         {
             StartDrawing3D();
         }
 
         GUILayout.Space(10);
 
-        // Erase Tool Section
         GUILayout.Label("Tools", EditorStyles.boldLabel);
 
         if (GUILayout.Button("Brush"))
@@ -77,7 +75,7 @@ public class PaintEditorTool : EditorWindow
 
         GUILayout.Space(10);
 
-        GUILayout.Label("Canvas Background", EditorStyles.boldLabel);
+        GUILayout.Label("Select a Background", EditorStyles.boldLabel);
 
         if (GUILayout.Button("White Background"))
         {
@@ -90,44 +88,34 @@ public class PaintEditorTool : EditorWindow
         }
 
         GUILayout.Space(10);
-        // Canvas Reset Section (White and Transparent)
-        GUILayout.Label("Canvas Reset", EditorStyles.boldLabel);
 
-        // Horizontal Layout for White and Transparent Buttons
+        GUILayout.Label("Reset the Whole Canvas", EditorStyles.boldLabel);
+
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Reset Canvas to White"))
+        if (GUILayout.Button("White"))
         {
             WhiteCanvas();
         }
 
-        if (GUILayout.Button("Reset Canvas to Transparent"))
+        if (GUILayout.Button("Transparent"))
         {
             Trans();
         }
 
         GUILayout.EndHorizontal();
 
-        // Fill Canvas Section
         GUILayout.BeginHorizontal();
-
 
         GUILayout.EndHorizontal();
 
         GUILayout.Space(10);
 
-        // Remove Canvas Section
-        if (GUILayout.Button("Remove Canvas"))
+
+        if (GUILayout.Button("Delete Canvas"))
         {
             RemoveCanvas();
         }
-    }
-
-
-    private void ApplySettings()
-    {
-        PaintThings.PenColor = new Color(penColor.r, penColor.g, penColor.b, transparency);
-        PaintThings.PenWidth = (int)penWidth;
     }
 
 
@@ -172,7 +160,7 @@ public class PaintEditorTool : EditorWindow
         PaintThings paintInstance = FindObjectOfType<PaintThings>();
         if (paintInstance != null)
         {
-            paintInstance.CurrentBrush = worldPoint => paintInstance.PenBrush(worldPoint); // Switch to Brush
+            paintInstance.CurrentBrush = worldPoint => paintInstance.PenBrush(worldPoint);
         }
     }
 
@@ -181,7 +169,7 @@ public class PaintEditorTool : EditorWindow
         PaintThings paintInstance = FindObjectOfType<PaintThings>();
         if (paintInstance != null)
         {
-            paintInstance.CurrentBrush = worldPoint => paintInstance.EraserBrush(worldPoint); // Switch to Eraser
+            paintInstance.CurrentBrush = worldPoint => paintInstance.EraserBrush(worldPoint);
         }
     }
 

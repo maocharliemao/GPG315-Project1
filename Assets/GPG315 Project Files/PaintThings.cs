@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class PaintThings : MonoBehaviour, IPaintable
 {
-    public enum PaintMode { Mode2D, Mode3D }
+    public enum PaintMode
+    {
+        Mode2D,
+        Mode3D
+    }
+
     public PaintMode CurrentMode;
 
     public static Color PenColor = Color.red;
     public static int PenWidth = 3;
 
     public delegate void BrushFunction(Vector2 worldPosition);
+
     public BrushFunction CurrentBrush;
 
     public LayerMask DrawingLayers;
@@ -52,9 +58,7 @@ public class PaintThings : MonoBehaviour, IPaintable
         wasMouseHeldDown = mouseHeldDown;
     }
 
-    /// <summary>
-    /// Determines whether to use 2D or 3D input and returns the painting position.
-    /// </summary>
+    // select which mode
     private Vector2? GetPaintPosition()
     {
         if (CurrentMode == PaintMode.Mode2D)
@@ -72,9 +76,10 @@ public class PaintThings : MonoBehaviour, IPaintable
                 return hit.point;
             }
         }
+
         return null;
     }
-
+    // brush to draw
     public void PenBrush(Vector2 worldPoint)
     {
         Vector2 pixelPos = WorldToPixelCoordinates(worldPoint);
@@ -92,7 +97,7 @@ public class PaintThings : MonoBehaviour, IPaintable
         ApplyPixelChanges();
         previousDragPosition = pixelPos;
     }
-
+    // paint math
     public void DrawLine(Vector2 startPoint, Vector2 endPoint, int width, Color color)
     {
         float distance = Vector2.Distance(startPoint, endPoint);
@@ -159,7 +164,7 @@ public class PaintThings : MonoBehaviour, IPaintable
         for (int i = 0; i < cleanColorsArray.Length; i++)
             cleanColorsArray[i] = ResetColor;
     }
-
+    // ereaser
     public void EraserBrush(Vector2 worldPoint)
     {
         Vector2 pixelPos = WorldToPixelCoordinates(worldPoint);
@@ -177,7 +182,8 @@ public class PaintThings : MonoBehaviour, IPaintable
         ApplyPixelChanges();
         previousDragPosition = pixelPos;
     }
-
+    
+    // background stuff
     public void WhiteBackground()
     {
         if (drawableTexture == null)
