@@ -8,7 +8,7 @@ public class PaintEditorTool : EditorWindow
     private Color penColor = Color.red;
     private float penWidth = 5f;
     private float transparency = 1f;
-    private static GameObject currentPaintCanvas;
+
 
     [MenuItem("Tools/Drawing Settings")]
     public static void ShowWindow()
@@ -56,10 +56,11 @@ public class PaintEditorTool : EditorWindow
         {
            Trans();
         }
-        if (GUILayout.Button("Remove Canvas"))
+        if (GUILayout.Button("remove"))
         {
-            RemoveCanvas();
+           RemoveCanvas();
         }
+
     }
 
     private void ApplySettings()
@@ -78,46 +79,20 @@ public class PaintEditorTool : EditorWindow
     {
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint2D.prefab");
 
-
         GameObject Paint = Instantiate(prefab);
         Paint.name = "Paint2DCanvas";
     }
-
-
-    // private void StartDrawing2D()
-    // {
-    //     SpawnCanvas("Assets/Paint/Paint2D.prefab", new Vector3(0, 0, 10));
-    // }
-    //
+    
     private void StartDrawing3D()
     {
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint3D.prefab");
-
+        
 
         GameObject Paint = Instantiate(prefab);
         Paint.name = "Paint3DCanvas";
     }
 
-
-
-    // private void SpawnCanvas(string prefabPath, Vector3 position)
-    // {
-    //     GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-    //
-    //     if (prefab != null)
-    //     {
-    //         RemoveCanvas();
-    //
-    //         currentPaintCanvas = Instantiate(prefab);
-    //         currentPaintCanvas.name = "PaintCanvas";
-    //         currentPaintCanvas.transform.position = position;
-    //
-    //         SceneView.RepaintAll(); 
-    //
-    //     }
-    // }
-
-
+    
     private void WhiteCanvas()
     {
         IPaintable paintInstance = FindObjectOfType<MonoBehaviour>() as IPaintable;
@@ -135,14 +110,20 @@ public class PaintEditorTool : EditorWindow
             paintInstance.TransparentBackground();
         }
     }
-    private void RemoveCanvas()
+    private void DeleteCanvas(string canvasName)
     {
-        if (currentPaintCanvas != null)
+        GameObject existingCanvas = GameObject.Find(canvasName);
+        if (existingCanvas != null)
         {
-            DestroyImmediate(currentPaintCanvas);
-            currentPaintCanvas = null;
+            Debug.Log("Destroying " + canvasName);
+            DestroyImmediate(existingCanvas);
         }
     }
     
+    private void RemoveCanvas()
+    {
+        DeleteCanvas("Paint2DCanvas");
+        DeleteCanvas("Paint3DCanvas");
+    }
 
 }

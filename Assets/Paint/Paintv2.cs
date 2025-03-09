@@ -188,4 +188,7 @@ public class Paintv2 : MonoBehaviour, IPaintable
         drawableTexture.SetPixels(transparentPixels);
         drawableTexture.Apply();
     }
+
+
+    
 }
