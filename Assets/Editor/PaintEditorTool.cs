@@ -121,7 +121,7 @@ public class PaintEditorTool : EditorWindow
 
     private void StartDrawing2D()
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint2D.prefab");
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GPG315 Project Files/Paint2D.prefab");
 
         GameObject Paint = Instantiate(prefab);
         Paint.name = "Paint2DCanvas";
@@ -129,7 +129,7 @@ public class PaintEditorTool : EditorWindow
 
     private void StartDrawing3D()
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Paint/Paint3D.prefab");
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GPG315 Project Files/Paint3D.prefab");
 
 
         GameObject Paint = Instantiate(prefab);
