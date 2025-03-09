@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1752910214809200434}
   - component: {fileID: -7887275565689150893}
   - component: {fileID: -7269353043939722033}
+  - component: {fileID: 3244865304546693356}
   m_Layer: 6
   m_Name: Paint3D
   m_TagString: Untagged
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650105834672557895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb754b653ee867a458aa9f2e75ffbf74, type: 3}
   m_Name: 
@@ -123,3 +124,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 19.2, y: 10.8, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3244865304546693356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650105834672557895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffb28f10e9ff604e978b3c1bd6aff12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentMode: 1
+  DrawingLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  ResetColor: {r: 0, g: 0, b: 0, a: 0}

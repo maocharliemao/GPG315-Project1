@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1752910214809200434}
   - component: {fileID: 319206142028780717}
   - component: {fileID: 1284875797543383929}
+  - component: {fileID: 5273392004530095851}
   m_Layer: 6
   m_Name: Paint2D
   m_TagString: Untagged
@@ -138,11 +139,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650105834672557895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21dc3553c71fb3749b840062c0cb2986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DrawingLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  ResetColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &5273392004530095851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650105834672557895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffb28f10e9ff604e978b3c1bd6aff12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentMode: 0
   DrawingLayers:
     serializedVersion: 2
     m_Bits: 64
